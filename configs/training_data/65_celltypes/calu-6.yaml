@@ -1,0 +1,3 @@
+dataset:
+  train: datasets/calu-6_TE.tsv
+  test: datasets/calu-6_TE.tsv

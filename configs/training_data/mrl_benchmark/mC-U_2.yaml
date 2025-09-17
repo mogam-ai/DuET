@@ -1,0 +1,29 @@
+model:
+  param:
+    encoder: single # [single | dual]
+
+loss:
+  ignore_test_name: False # makes model to log only r, rho without test set name (use in case of single test set)
+
+dataset:
+  train: benchmarks/datasets/mrl_prediction/train_mC-U_2.tsv
+  test: benchmarks/datasets/mrl_prediction/mC-U_2.tsv
+  param:
+    utr_seq_size: 50
+    cds_seq_size: 0
+
+    use_sequence_feature: False
+    sequence_feature_path: ""
+    sequence_feature_cols: []
+
+    utr_col: utr5
+    label_col: te
+    join_col: utr5
+
+    use_codon_encoding: False
+    log_label: False
+    scale_label: False
+
+datamodule:
+  batch_size: 256
+  do_kfold_test: False

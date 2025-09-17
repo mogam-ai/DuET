@@ -1,0 +1,3 @@
+dataset:
+  train: datasets/mm-1s_TE.tsv
+  test: datasets/mm-1s_TE.tsv

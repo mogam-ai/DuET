@@ -1,0 +1,56 @@
+exp_name: translatelstm_benchmark_0617    # experiment name / log folder name
+notes: "translatelstm base model w/o cds" # experiment note
+use_wandb: True                           # save training result online (wandb)
+project_name: translatelstm               # wandb project name
+debug: False                              # if true, only run 1 step
+log_dir: _logs
+seed: 42
+
+model:
+  name: translatelstm
+  param:
+    feature_size: 5
+    hidden_dim: 64
+    dropout: 0.2
+
+loss:
+  name: mse
+  ignore_test_name: True
+
+dataset:
+  name: translatelstm
+  train: /fsx/s3/project/P240017_mRNA_UTR/data/MPRA/from_utrlm/train_U_1.tsv
+  test: /fsx/s3/project/P240017_mRNA_UTR/data/MPRA/from_utrlm/U_1.tsv
+  param:
+    utr_size: 100
+
+    use_sequence_feature: True
+    sequence_feature_path: datasets/65_celltypes_sequence_features.tsv
+    sequence_feature_cols: [ "utr5Len", "utr5_normMFE", "utr5_gcRatio", "utr5_numOutFrameAUG", "utr5_numInFrameAUG" ] 
+
+    utr_col: utr5
+    label_col: te
+    join_col: txID
+
+datamodule:
+  batch_size: 512
+  num_workers: 8
+  train_size: 0.95
+
+optimizer:
+  name: adamw
+  lr: 1e-3
+
+scheduler:
+  name: ReduceLROnPlateau
+  param:
+    factor: 0.5
+    patience: 10
+    min_lr: 1e-5
+
+trainer:
+  max_epochs: 50
+  save_epochs: 5
+  run_fit: True
+  run_test: True
+  save_fig: True

@@ -1,0 +1,3 @@
+dataset:
+  train: datasets/hek293-t-rex_TE.tsv
+  test: datasets/hek293-t-rex_TE.tsv

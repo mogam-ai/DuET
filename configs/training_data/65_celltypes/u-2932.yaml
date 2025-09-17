@@ -1,0 +1,3 @@
+dataset:
+  train: datasets/u-2932_TE.tsv
+  test: datasets/u-2932_TE.tsv

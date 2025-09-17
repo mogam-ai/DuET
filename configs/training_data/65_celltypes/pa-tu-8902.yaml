@@ -1,0 +1,3 @@
+dataset:
+  train: datasets/pa-tu-8902_TE.tsv
+  test: datasets/pa-tu-8902_TE.tsv

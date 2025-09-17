@@ -1,0 +1,3 @@
+dataset:
+  train: datasets/mda-lm2_TE.tsv
+  test: datasets/mda-lm2_TE.tsv

@@ -1,0 +1,119 @@
+exp_name: duet_singleencoder                    # experiment name / log folder name
+notes: "DuET single encoder model"              # experiment note
+use_wandb: True                                 # save training result online (wandb)
+project_name: duet                              # wandb project name
+debug: False                                    # if true, only run 1 step
+log_dir: _logs
+seed: 42
+aggregate_kfold: False
+
+model:
+  name: duet
+  param:
+    encoder: single
+  
+    utr_block:
+      block_0:
+        model: NormActConv
+        out_channels: 128
+        kernel_size: 7
+        dropout: 0.0
+      block_1:
+        model: MBConv
+        out_channels: 128
+        kernel_size: 5
+      block_2:
+        model: MBConv
+        out_channels: 64
+        kernel_size: 5
+      block_3:
+        model: MBConv
+        out_channels: 64
+        kernel_size: 5
+      block_4:
+        model: MBConv
+        out_channels: 32
+        kernel_size: 5
+      block_5:
+        model: MBConv
+        out_channels: 32
+        kernel_size: 5
+      block_6:
+        model: MBConv
+        out_channels: 32
+        kernel_size: 5
+      block_7:
+        model: NormActConv
+        out_channels: 16
+        kernel_size: 1
+        disable_norm: True
+        dropout: 0.0
+        resize_bias: True
+
+    utr_expand_ratio: 4
+    utr_se_reduction: 4
+    utr_filter_per_group: 1
+    utr_stride: 1
+    utr_dropout: 0.0
+
+    residual: False
+    norm_layer: BatchNorm
+    act_layer: SiLU
+    bn_momentum: 0.1
+
+    do_layernorm: True
+
+loss:
+  name: mse
+  ignore_test_name: True 
+
+dataset:
+  name: duet
+  train: datasets/all-celltype_TE.tsv
+  test: datasets/all-celltype_TE.tsv
+  param:
+    utr_seq_size: 100
+    cds_seq_size: 1500
+    utr_channel_size: 4
+    cds_channel_size: 64
+
+    use_sequence_feature: False
+    sequence_feature_path: datasets/65_celltypes_sequence_features.tsv
+
+    utr_col: utr5
+    cds_col: cds
+    label_col: te
+    join_col: txID
+
+    log_label: True
+    scale_label: True
+    use_codon_encoding: False
+
+datamodule:
+  batch_size: 32
+  num_workers: 2
+  train_size: 0.95
+
+  do_kfold_test: True
+  kfold_test_k: 10
+  kfold_test_fold: 0
+
+optimizer:
+  name: adamw
+  lr: 1e-4
+
+scheduler:
+  name: ReduceLROnPlateau
+  param:
+    factor: 0.8
+    patience: 3
+    min_lr: 1e-7
+
+trainer:
+  max_epochs: 50
+  save_epochs: 1
+  early_stopping: 5
+  min_delta: 0.01
+  run_fit: True
+  run_test: True
+  save_fig: True

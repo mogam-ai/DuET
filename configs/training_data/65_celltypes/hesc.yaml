@@ -1,0 +1,3 @@
+dataset:
+  train: datasets/hesc_TE.tsv
+  test: datasets/hesc_TE.tsv

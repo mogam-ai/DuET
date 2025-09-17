@@ -1,0 +1,70 @@
+exp_name: translatelstm_base    # experiment name / log folder name
+notes: "translatelstm base model"         # experiment note
+use_wandb: True                           # save training result online (wandb)
+project_name: translatelstm               # wandb project name
+debug: False                              # if true, only run 1 step
+log_dir: _logs
+seed: 42
+
+model:
+  name: translatelstm_dual
+  param:
+    encoder: dual
+    feature_size: 4
+    hidden_dim: 64
+    utr_dropout: 0.8
+    cds_dropout: 0.2
+
+loss:
+  name: mse
+  ignore_test_name: True # ignore test loss in kfold test
+
+dataset:
+  name: duet
+  train: benchmarks/datasets/te_prediction/HEK293T_sequence.tsv
+  test: benchmarks/datasets/te_prediction/HEK293T_sequence.tsv
+  param:
+    utr_seq_size: 100
+    cds_seq_size: 100
+    utr_channel_size: 4
+    cds_channel_size: 4
+
+    use_sequence_feature: True
+    sequence_feature_path: benchmarks/datasets/te_prediction/te_benchmark_data_sequence_features.tsv
+    sequence_feature_cols: [ "utr5Len", "utr5_normMFE", "utr5_gcRatio", "utr5_numOutFrameAUG", "utr5_numInFrameAUG" ] 
+
+    utr_col: utr5
+    cds_col: cds
+    label_col: te
+    join_col: txID
+
+    log_label: True
+    scale_label: True
+
+    use_codon_encoding: False
+
+datamodule:
+  batch_size: 256
+  num_workers: 8
+  train_size: 0.95
+
+  do_kfold_test: True
+  kfold_test_k: 10
+
+optimizer:
+  name: adamw
+  lr: 1e-3
+
+scheduler:
+  name: ReduceLROnPlateau
+  param:
+    factor: 0.5
+    patience: 10
+    min_lr: 1e-5
+
+trainer:
+  max_epochs: 250
+  save_epochs: 3
+  run_fit: True
+  run_test: True
+  save_fig: True

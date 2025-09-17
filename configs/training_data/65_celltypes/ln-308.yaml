@@ -1,0 +1,3 @@
+dataset:
+  train: datasets/ln-308_TE.tsv
+  test: datasets/ln-308_TE.tsv

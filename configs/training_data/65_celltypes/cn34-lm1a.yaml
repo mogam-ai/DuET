@@ -1,0 +1,3 @@
+dataset:
+  train: datasets/cn34-lm1a_TE.tsv
+  test: datasets/cn34-lm1a_TE.tsv

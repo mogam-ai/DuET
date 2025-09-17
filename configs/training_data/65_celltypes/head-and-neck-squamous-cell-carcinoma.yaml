@@ -1,0 +1,3 @@
+dataset:
+  train: datasets/head-and-neck-squamous-cell-carcinoma_TE.tsv
+  test: datasets/head-and-neck-squamous-cell-carcinoma_TE.tsv

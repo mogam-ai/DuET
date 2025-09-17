@@ -1,0 +1,3 @@
+dataset:
+  train: datasets/mcf-10a_TE.tsv
+  test: datasets/mcf-10a_TE.tsv
