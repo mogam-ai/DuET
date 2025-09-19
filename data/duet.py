@@ -66,14 +66,14 @@ class DuetDataset(Dataset):
     # Padding is done at dataset loading time.
     # Only one-hot encoding will be processed in __getitem__.
     self.utr_channel_size = utr_channel_size
-    if self.utr_seq_size:
+    if self.utr_seq_size > 0:
       self.data[utr_col] = self.data[utr_col].str[-self.utr_seq_size:]  # Truncate leftmost bases and apply padding
     else:
       self.data[utr_col] = "" # negative indexing doesn't work for utr_seq_size = 0
     self.data[utr_col] = self.data[utr_col].str.pad(self.utr_seq_size, side='left', fillchar='N')
 
     self.cds_channel_size = cds_channel_size
-    if self.cds_seq_size:
+    if self.cds_seq_size > 0:
         self.data[cds_col] = self.data[cds_col].str[:self.cds_seq_size]  # Truncate rightmost bases and apply padding
     else:
         self.data[cds_col] = ""
@@ -130,8 +130,6 @@ class DuetDataset(Dataset):
       self.utr_channel_size = self.cds_channel_size
       self.tensorize_utr = self.tensorize_cds
 
-    self.id_col = self.data.columns[0] # first column (entry key) needs to be unique.
-
   def __getitem__(self, i: int):
     irow = self.data.iloc[i]
     
@@ -155,7 +153,6 @@ class DuetDataset(Dataset):
             "start": start,  # one-hot encoded start context (if use_start_context is True)
             "y": y,  # TE label
             "sequence_feature": sequence_feature,  # sequence feature vector (if use_sequence_feature is True)
-            "txid": irow[self.id_col]  # unique identifier for the entry
             }
 
   def __len__(self) -> int:

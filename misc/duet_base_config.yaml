@@ -1,0 +1,159 @@
+exp_name: duet_nodedup_base-utr5.100+cds.1500-all-celltype-seed42-split02
+notes: duet baseline
+use_wandb: true
+project_name: duet_without_dedup
+debug: false
+log_dir: _logs
+seed: 42
+aggregate_kfold: true
+model:
+  name: duet
+  param:
+    encoder: dual
+    utr_block:
+      block_0:
+        model: NormActConv
+        out_channels: 128
+        kernel_size: 7
+        dropout: 0.0
+      block_1:
+        model: MBConv
+        out_channels: 128
+        kernel_size: 5
+      block_2:
+        model: MBConv
+        out_channels: 64
+        kernel_size: 5
+      block_3:
+        model: MBConv
+        out_channels: 64
+        kernel_size: 5
+      block_4:
+        model: MBConv
+        out_channels: 32
+        kernel_size: 5
+      block_5:
+        model: MBConv
+        out_channels: 32
+        kernel_size: 5
+      block_6:
+        model: MBConv
+        out_channels: 32
+        kernel_size: 5
+      block_7:
+        model: NormActConv
+        out_channels: 16
+        kernel_size: 1
+        disable_norm: true
+        dropout: 0.0
+        resize_bias: true
+    utr_expand_ratio: 4
+    utr_se_reduction: 4
+    utr_filter_per_group: 1
+    utr_stride: 1
+    utr_dropout: 0.0
+    cds_block:
+      block_0:
+        model: NormActConv
+        out_channels: 256
+        kernel_size: 5
+        dropout: 0.0
+      block_1:
+        model: MBConv
+        out_channels: 128
+        kernel_size: 3
+      block_2:
+        model: MBConv
+        out_channels: 64
+        kernel_size: 3
+      block_3:
+        model: MBConv
+        out_channels: 64
+        kernel_size: 3
+      block_4:
+        model: MBConv
+        out_channels: 32
+        kernel_size: 3
+      block_5:
+        model: MBConv
+        out_channels: 32
+        kernel_size: 3
+      block_6:
+        model: MBConv
+        out_channels: 32
+        kernel_size: 3
+      block_7:
+        model: NormActConv
+        out_channels: 16
+        kernel_size: 1
+        disable_norm: true
+        dropout: 0.0
+        resize_bias: true
+    cds_expand_ratio: 4
+    cds_se_reduction: 4
+    cds_filter_per_group: 1
+    cds_stride: 1
+    cds_dropout: 0.0
+    residual: false
+    norm_layer: BatchNorm
+    act_layer: SiLU
+    bn_momentum: 0.1
+    global_block:
+      model: AvgPool
+      n_layer: 4
+    do_layernorm: true
+loss:
+  name: mse
+  ignore_test_name: true
+dataset:
+  name: duet
+  train: /fsx/s3/project/P240017_mRNA_UTR/data/RPFdb/TE_by_celltype/all-celltype_TE.tsv
+  test: /fsx/s3/project/P240017_mRNA_UTR/data/RPFdb/TE_by_celltype/all-celltype_TE.tsv
+  param:
+    utr_seq_size: 100
+    cds_seq_size: 1500
+    utr_channel_size: 4
+    cds_channel_size: 64
+    use_metadata: false
+    metadata_path: /fsx/s3/project/P240017_mRNA_UTR/data/RPFdb/xrefs/gencode.v47.for_poc.metadata_v2_updated.tsv
+    metadata_cols:
+    - utr5_length
+    - norm_local_MFE
+    - GC
+    - num_outframe_uAUGs
+    - num_inframe_uAUGs
+    utr_col: utr5
+    cds_col: cds
+    input_col: x
+    label_col: te
+    join_col: txID
+    log_label: true
+    scale_label: true
+    use_triplet_phase: false
+    use_codon_encoding: true
+    utr_overlap_size: 0
+    cds_overlap_size: 0
+datamodule:
+  batch_size: 32
+  num_workers: 2
+  train_size: 0.95
+  do_kfold_test: true
+  kfold_test_k: 10
+  kfold_test_fold: 2
+optimizer:
+  name: adamw
+  lr: 0.0001
+scheduler:
+  name: ReduceLROnPlateau
+  param:
+    factor: 0.8
+    patience: 3
+    min_lr: 1.0e-07
+trainer:
+  max_epochs: 50
+  save_epochs: 1
+  early_stopping: 5
+  run_fit: true
+  run_test: true
+  save_fig: true
+  min_delta: 0.01

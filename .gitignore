@@ -217,9 +217,7 @@ tests/scrib/
 DuET_ckp_file_path.xlsx
 attribution_score_results/
 
-benchmarks/datasets/
-benchmarks/TranslateLSTM/
-benchmarks/UTR-LM/
+benchmarks/
 
 datasets/
 
@@ -230,11 +228,13 @@ environment_full.yaml
 xgb_feature_importance.tsv
 train_xgboost_from_sequence_features.ipynb
 
-predict.py
 requirements.txt
 
 scripts/*ipynb
 scripts/*R
 scripts/*/
+scripts/*modisco*
+
+misc/Ray2013_rbp_Homo_sapiens.dna_encoded.meme
 
 _logs/
