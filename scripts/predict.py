@@ -76,7 +76,10 @@ if args.output is not None and os.path.exists(args.output):
 
 
 print("Loading libraries...", end="\t", flush=True)
+import sys
 import os
+project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+sys.path.insert(0, project_root)
 import torch
 import joblib
 import secrets
