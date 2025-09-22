@@ -1,8 +1,8 @@
-exp_name: translatelstm_base    # experiment name / log folder name
-notes: "translatelstm base model"         # experiment note
-use_wandb: True                           # save training result online (wandb)
-project_name: translatelstm               # wandb project name
-debug: False                              # if true, only run 1 step
+exp_name: translatelstm_base
+notes: "translatelstm base model"
+use_wandb: True
+project_name: translatelstm
+debug: False
 log_dir: _logs
 seed: 42
 
@@ -17,7 +17,7 @@ model:
 
 loss:
   name: mse
-  ignore_test_name: True # ignore test loss in kfold test
+  ignore_test_name: True
 
 dataset:
   name: duet

@@ -235,6 +235,8 @@ scripts/*R
 scripts/*/
 scripts/*modisco*
 
+*/translatelstm*
+
 misc/Ray2013_rbp_Homo_sapiens.dna_encoded.meme
 
 _logs/
