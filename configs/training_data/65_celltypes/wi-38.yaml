@@ -1,3 +1,0 @@
-dataset:
-  train: datasets/wi-38_TE.tsv
-  test: datasets/wi-38_TE.tsv

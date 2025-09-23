@@ -1,3 +1,0 @@
-dataset:
-  train: datasets/foreskin-fibroblast_TE.tsv
-  test: datasets/foreskin-fibroblast_TE.tsv

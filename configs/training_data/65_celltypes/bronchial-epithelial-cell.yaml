@@ -1,3 +1,0 @@
-dataset:
-  train: datasets/bronchial-epithelial-cell_TE.tsv
-  test: datasets/bronchial-epithelial-cell_TE.tsv

@@ -1,3 +1,0 @@
-dataset:
-  train: datasets/late-pancreatic-progenitor-from-h1-hesc_TE.tsv
-  test: datasets/late-pancreatic-progenitor-from-h1-hesc_TE.tsv

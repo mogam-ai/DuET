@@ -1,8 +1,8 @@
 dataset:
-  train: benchmarks/datasets/te_prediction/HEK293T_sequence.tsv
-  test: benchmarks/datasets/te_prediction/HEK293T_sequence.tsv
+  train: datasets/te_benchmark/HEK293T_sequence.tsv
+  test: datasets/te_benchmark/HEK293T_sequence.tsv
   param:
-    sequence_feature_path: benchmarks/datasets/te_prediction/te_benchmark_data_sequence_features.tsv
+    sequence_feature_path: datasets/te_benchmark/te_benchmark_data_sequence_features.tsv
 
 datamodule:
   batch_size: 16

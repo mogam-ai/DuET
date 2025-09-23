@@ -1,3 +1,0 @@
-dataset:
-  train: datasets/hela_TE.tsv
-  test: datasets/hela_TE.tsv

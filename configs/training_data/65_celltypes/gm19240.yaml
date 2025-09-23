@@ -1,3 +1,0 @@
-dataset:
-  train: datasets/gm19240_TE.tsv
-  test: datasets/gm19240_TE.tsv

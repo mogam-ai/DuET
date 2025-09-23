@@ -6,14 +6,14 @@ loss:
   ignore_test_name: False # makes model to log only r, rho without test set name (use in case of single test set)
 
 dataset:
-  train: benchmarks/datasets/mrl_prediction/train_pU_2.tsv
-  test: benchmarks/datasets/mrl_prediction/pU_2.tsv
+  train: datasets/mrl_benchmark/train_pU_2.tsv
+  test: datasets/mrl_benchmark/pU_2.tsv
   param:
     utr_seq_size: 50
     cds_seq_size: 0
 
     use_sequence_feature: False
-    sequence_feature_path: ""
+    sequence_feature_path: datasets/mrl_benchmark/pU_2_sequence_feature.tsv
     sequence_feature_cols: []
 
     utr_col: utr5

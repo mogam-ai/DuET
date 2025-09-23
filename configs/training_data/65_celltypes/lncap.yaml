@@ -1,3 +1,0 @@
-dataset:
-  train: datasets/lncap_TE.tsv
-  test: datasets/lncap_TE.tsv

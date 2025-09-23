@@ -1,3 +1,0 @@
-dataset:
-  train: datasets/hep-g2_TE.tsv
-  test: datasets/hep-g2_TE.tsv

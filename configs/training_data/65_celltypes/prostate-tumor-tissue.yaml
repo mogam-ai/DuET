@@ -1,3 +1,0 @@
-dataset:
-  train: datasets/prostate-tumor-tissue_TE.tsv
-  test: datasets/prostate-tumor-tissue_TE.tsv

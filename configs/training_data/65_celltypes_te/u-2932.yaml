@@ -1,0 +1,3 @@
+dataset:
+  train: datasets/65_celltypes_te/u-2932_TE.tsv
+  test: datasets/65_celltypes_te/u-2932_TE.tsv

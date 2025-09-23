@@ -1,3 +1,0 @@
-dataset:
-  train: datasets/plc-prf-5_TE.tsv
-  test: datasets/plc-prf-5_TE.tsv

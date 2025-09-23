@@ -1,3 +1,0 @@
-dataset:
-  train: datasets/mda-mb-231_TE.tsv
-  test: datasets/mda-mb-231_TE.tsv

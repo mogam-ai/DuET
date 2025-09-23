@@ -1,3 +1,0 @@
-dataset:
-  train: datasets/kyse-30_TE.tsv
-  test: datasets/kyse-30_TE.tsv

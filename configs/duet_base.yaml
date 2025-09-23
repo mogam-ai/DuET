@@ -113,8 +113,8 @@ loss:
 
 dataset:
   name: duet
-  train: datasets/all-celltype_TE.tsv
-  test: datasets/all-celltype_TE.tsv
+  train: datasets/65_celltypes_te/all-celltype_TE.tsv
+  test: datasets/65_celltypes_te/all-celltype_TE.tsv
   param:
     utr_seq_size: 100
     cds_seq_size: 1500
@@ -122,7 +122,7 @@ dataset:
     cds_channel_size: 64
 
     use_sequence_feature: False
-    sequence_feature_path: datasets/65_celltypes_sequence_features.tsv
+    sequence_feature_path: datasets/65_celltypes_te/65_celltypes_sequence_features.tsv
 
     utr_col: utr5
     cds_col: cds

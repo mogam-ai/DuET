@@ -1,3 +1,0 @@
-dataset:
-  train: datasets/neural-d14_TE.tsv
-  test: datasets/neural-d14_TE.tsv

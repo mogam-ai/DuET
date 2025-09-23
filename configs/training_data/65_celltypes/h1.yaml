@@ -1,3 +1,0 @@
-dataset:
-  train: datasets/h1_TE.tsv
-  test: datasets/h1_TE.tsv

@@ -1,3 +1,0 @@
-dataset:
-  train: datasets/brain-tissue_TE.tsv
-  test: datasets/brain-tissue_TE.tsv

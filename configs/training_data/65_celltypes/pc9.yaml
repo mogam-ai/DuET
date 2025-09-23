@@ -1,3 +1,0 @@
-dataset:
-  train: datasets/pc9_TE.tsv
-  test: datasets/pc9_TE.tsv
