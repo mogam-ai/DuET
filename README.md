@@ -16,10 +16,10 @@ $ conda activate duet
 
 ### Dependencies
 Note: DuET utilizes CUDA-based GPUs for model training. The training process was conducted using an NVIDIA A100-SXM4-40GB GPU.
-- Python 3.10.13
-- PyTorch 2.2.0
-- PyTorch-cuda 12.1
-- PyTorch Lightning 2.4.0
+- python 3.10.13
+- pytorch 2.2.0
+- pytorch-cuda 12.1
+- pytorch-lightning 2.4.0
 - numpy 1.26.3
 - pandas 2.1.4
 - omegaconf
