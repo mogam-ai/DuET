@@ -1,0 +1,3 @@
+dataset:
+  train: datasets/wm-902b_TE.tsv
+  test: datasets/wm-902b_TE.tsv

@@ -1,0 +1,3 @@
+dataset:
+  train: datasets/kopt-k1_TE.tsv
+  test: datasets/kopt-k1_TE.tsv

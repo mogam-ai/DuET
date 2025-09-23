@@ -1,0 +1,3 @@
+dataset:
+  train: datasets/imr-90_TE.tsv
+  test: datasets/imr-90_TE.tsv

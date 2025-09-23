@@ -1,0 +1,11 @@
+dataset:
+  train: benchmarks/datasets/te_prediction/Muscle-tissue_sequence.tsv
+  test: benchmarks/datasets/te_prediction/Muscle-tissue_sequence.tsv
+  param:
+    sequence_feature_path: benchmarks/datasets/te_prediction/te_benchmark_data_sequence_features.tsv
+
+datamodule:
+  batch_size: 16
+
+trainer:
+  early_stopping: 12
