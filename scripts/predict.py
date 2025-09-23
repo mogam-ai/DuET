@@ -6,6 +6,7 @@
 # Citation:    TBD
 
 
+import os
 import argparse
 from argparse import RawTextHelpFormatter
 
@@ -36,7 +37,7 @@ sequence_args.add_argument("-u", "--utr5", type=str,
 sequence_args.add_argument("-c", "--cds", type=str,
                     help="Input CDS sequence")
 batch_args = parser.add_argument_group("Predict a batch of sequences from a .tsv file",
-                                       "The file must have txID, utr5, cds, te columns)")
+                                       "(The file must have txID, utr5, cds, te columns)")
 batch_args.add_argument("-i", "--input", type=str,
                     help="Path to input .tsv file containing sequences") 
 batch_args.add_argument("-o", "--output", type=str,
@@ -52,7 +53,8 @@ model_args.add_argument("--label_scaler", type=str, default="misc/duet_base_scal
 args = parser.parse_args()
 
 if args.input is None and (args.utr5 is None or args.cds is None):
-    print("\x1b[1mEither --input or both --utr5 and --cds must be specified\x1b[0m")
+    print("\x1b[1mEither --input or both --utr5 and --cds must be specified\x1b[0m\n")
+    parser.print_help()
     exit(1)
 
 if args.input is not None:
@@ -77,7 +79,6 @@ if args.output is not None and os.path.exists(args.output):
 
 print("Loading libraries...", end="\t", flush=True)
 import sys
-import os
 project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.insert(0, project_root)
 import torch
@@ -146,12 +147,15 @@ with torch.no_grad():
 
 if batch_mode:
     pred_y = np.expm1(label_scaler.inverse_transform(np.concatenate(pred_y, axis=0).reshape(-1, 1)))
+    output = pd.DataFrame({
+        "txID": datamodule.dataset.data["txID"],
+        "pred_TE": pred_y.flatten()
+        })
     if args.output is not None:
-        pd.DataFrame(pred_y, columns=["pred_TE"]).to_csv(args.output, sep="\t", index=False)
+        output.to_csv(args.output, sep="\t", index=False)
     else:
-        print("pred_TE")
-        for k in pred_y:
-            print(k)
+        print("\n\n")
+        output.to_csv(sys.stdout, sep="\t", index=False)
 else:
     pred_y = np.expm1(label_scaler.inverse_transform(pred_y[0].reshape(-1, 1)))
     print()

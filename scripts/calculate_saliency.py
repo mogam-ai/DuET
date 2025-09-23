@@ -6,8 +6,9 @@
 
 
 import sys
-sys.path.append("..")
 import os
+project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+sys.path.insert(0, project_root)
 import torch
 torch.multiprocessing.set_sharing_strategy("file_system")
 import numpy as np

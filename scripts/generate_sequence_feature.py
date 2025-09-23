@@ -6,7 +6,10 @@
 # Citation:    TBD
 
 
+import sys
 import os
+project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+sys.path.insert(0, project_root)
 import RNA
 import builtins
 import re
@@ -27,7 +30,7 @@ from typing import Callable, Final, Optional
 from pathlib import Path
 from copy import deepcopy
 
-from utils import CODON_TO_AA, codon_weight
+from data.utils import CODON_TO_AA, codon_weight
 
 
 # Define global variables
