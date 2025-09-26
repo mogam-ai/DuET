@@ -16,14 +16,14 @@ $ conda activate duet
 
 ### Dependencies
 Note: DuET utilizes CUDA-based GPUs for model training. The training process was conducted using an NVIDIA A100-SXM4-40GB GPU.
-- python 3.10.13
-- pytorch 2.2.0
-- pytorch-cuda 12.1
-- pytorch-lightning 2.4.0
-- numpy 1.26.3
-- pandas 2.1.4
-- omegaconf
-- wandb
+- `python` 3.10.13
+- `pytorch` 2.2.0
+- `pytorch-cuda` 12.1
+- `pytorch-lightning` 2.4.0
+- `numpy` 1.26.3
+- `pandas` 2.1.4
+- `omegaconf`
+- `wandb`
 
 ## Usage
 
@@ -46,15 +46,15 @@ $ CUDA_VISIBLE_DEVICES=0 python scripts/train.py \
     --config configs/training_data/all-celltype.yaml \
     --override-configs model.param.encoder='dual' optimizer.lr=1e-5 trainer.max_epochs=100
 ```
-**Usage of WanDB**<br>
-We implemented [WanDB](https://wandb.ai/) to effectively monitor the training processes.<br>
-To proceed with WanDB, please follow [this tutorial](https://wandb.ai/quickstart?utm_source=app-resource-center&utm_medium=app&utm_term=quickstart&product=models) before running the training script.<br>
-You also need to modify the following configuration with your own WanDB settings:
+**Usage of WandB**<br>
+We implemented [WandB](https://wandb.ai/) to effectively monitor the training processes.<br>
+To proceed with WandB, please follow [this tutorial](https://wandb.ai/quickstart?utm_source=app-resource-center&utm_medium=app&utm_term=quickstart&product=models) before running the training script.<br>
+You also need to modify the following configuration with your own WandB settings:
 ```yaml
-use_wandb: [set to True to use WanDB or False to not]
+use_wandb: [set to True to use WandB or False to not]
 exp_name: [your exp name for this training process]
 notes: [your note for this training process]
-project_name: [your WanDB project name]
+project_name: [your WandB project name]
 ```
 
 ### Prediction using trained model instance
