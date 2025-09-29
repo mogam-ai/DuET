@@ -65,7 +65,8 @@ $ python scripts/predict.py \
     --cds [your CDS sequence]
 ```
 
-Use batch input mode to predict TEs of multiple sequences:
+Use batch input mode to predict TEs of multiple sequences:<br>
+(To format your own input batch file, see `misc/batch_dataset_example.tsv`.)
 ```bash
 $ python scripts/predict.py \
     --input [path to input_file.tsv]
