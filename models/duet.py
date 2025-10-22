@@ -310,7 +310,7 @@ class DuetModel(Model):
     # output layer
     self.use_sequence_feature = use_sequence_feature
     if self.use_sequence_feature:
-      self.metadata_block = nn.Sequential(
+      self.sequence_feature_block = nn.Sequential(
         nn.Linear(sequence_feature_size,
                   sequence_feature_size // feature_compress_scale),
         self.act_layer()
@@ -325,7 +325,7 @@ class DuetModel(Model):
       if self.use_start_context:
         self.start_embed_norm = nn.LayerNorm(self.start_output_channels)
       if self.use_sequence_feature:
-        self.metadata_embed_norm = nn.LayerNorm(sequence_feature_size // feature_compress_scale)
+        self.sequence_feature_embed_norm = nn.LayerNorm(sequence_feature_size // feature_compress_scale)
     
     self.dense = nn.Sequential(
       nn.Linear(
@@ -361,12 +361,12 @@ class DuetModel(Model):
         start = self.start_embed_norm(start)
       x = torch.cat([x, start], dim=-1) # (batch, utr_out_channels+cds_out_channels+start_out_channels)
       
-    metadata_tensor = None
+    sequence_feature_tensor = None
     if self.use_sequence_feature:
-      metadata_tensor = self.metadata_block(batch['metadata']) # (batch, metadata)
+      sequence_feature_tensor = self.sequence_feature_block(batch['sequence_feature']) # (batch, sequence_feature)
       if self.do_layernorm:
-        metadata_tensor = self.metadata_embed_norm(metadata_tensor)
-      x = torch.cat([x, metadata_tensor], dim=-1) # (batch, out_channels+metadata)
+        sequence_feature_tensor = self.sequence_feature_embed_norm(sequence_feature_tensor)
+      x = torch.cat([x, sequence_feature_tensor], dim=-1) # (batch, out_channels+sequence_feature)
       
     return x.detach(), x
 
