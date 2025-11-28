@@ -327,9 +327,14 @@ class DuetModel(Model):
       if self.use_sequence_feature:
         self.sequence_feature_embed_norm = nn.LayerNorm(sequence_feature_size // feature_compress_scale)
     
+    dense_input_size = final_input_channels + (sequence_feature_size if use_sequence_feature else 0)
     self.dense = nn.Sequential(
+      #nn.Linear(
+      #  in_features=dense_input_size,
+      #  out_features=dense_input_size,
+      #),
       nn.Linear(
-        in_features=final_input_channels + (sequence_feature_size if use_sequence_feature else 0),
+        in_features=dense_input_size,
         out_features=1,
       ),
       nn.Flatten(),
