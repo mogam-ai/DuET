@@ -113,7 +113,7 @@ dataset:
     label_col: te
     join_col: txID
 
-    log_label: True
+    log_label: False
     scale_label: True
     use_codon_encoding: True
 
