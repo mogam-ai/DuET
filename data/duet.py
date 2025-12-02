@@ -4,7 +4,6 @@
 # Contact:     sungho.lee@mogam.re.kr; jaewon.lee@mogam.re.kr; jinhee.hong@mogam.re.kr
 # Citation:    TBD
 
-
 import torch
 import numpy as np
 import pandas as pd
