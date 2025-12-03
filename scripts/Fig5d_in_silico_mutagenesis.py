@@ -25,10 +25,10 @@ HAMP, SPY의 경우 UTR5 100nt으로 학습시킨 것이 결과가 잘나옴
 나머지는 UTR5 500nt으로 학습시킨 것이 더 잘나오는 경향이 있음
 """
 # load "All celltype" model ckp
-# ckp_file = pd.read_csv('duet_v2_checkpoints_500+1500.csv')
+ckp_file = pd.read_csv('duet_v2_checkpoints_500+1500.csv')
 
 # checkpont
-ckp_file = pd.read_csv('duet_v2_checkpoints.csv')
+# ckp_file = pd.read_csv('duet_v2_checkpoints.csv')
 all_celltype_ckp = ckp_file[ckp_file['cellType']=='All_celltypes']['checkpoint'].iloc[0]
 meta_path = '/fsx/s3/project/P240017_mRNA_UTR/data/Ribo-seq/mappings/GENCODE_v47/gencode.v47.map.all_tx.fullseq.total_var_metadata_v3.tsv'
 ############################################
@@ -81,12 +81,7 @@ def predict_te(tmp_csv_path, utr5_seq, mutated_seqs, mutated_bases):
     # datamodule 대신에 dataset 자체를 로드
     dataset = DuetDataset(data_path=tmp_csv_path,
                           **cfg.dataset.param)
-    # datamodule.setup(stage='fit')
-    # dataset = MgNetDataset(data_path=f'./mutagensis/tmp_{gene}.csv',
-    #                             encoder=('dual'),
-    #                             use_start_context= False,
-    #                             **cfg.dataset.param)
-
+    
     data_loader = DataLoader(
         dataset=dataset,
         batch_size=1,
@@ -162,6 +157,7 @@ def combined_plot(pivot_df, gene, mut_pos, mut_labels, figsize=(20, 6)):
     """
     Heatmap과 Lineplot을 하나의 Figure에 그리는 함수.
     ax1은 Heatmap, ax2은 Lineplot에 해당
+    뒤에서부터 100nt까지만 dataframe 가져오기
     """
     # Heatmap
     fig = plt.figure(figsize=figsize)  # 전체 Figure 크기 설정
@@ -169,6 +165,7 @@ def combined_plot(pivot_df, gene, mut_pos, mut_labels, figsize=(20, 6)):
     
     # Index T -> U로 변경
     pivot_df.index = pivot_df.index.str.replace('T', 'U')
+    pivot_df = pivot_df.iloc[:,-100:]
     # Heatmap 생성 (ax1)
     ax1 = fig.add_subplot(gs[1])  # 첫 번째 subplot
     
@@ -227,14 +224,14 @@ def choose_gene(i):
     유전자, 유전자 위치, 변이 정보"""
     
     meta = pd.read_csv(meta_path, sep='\t')
-    gene = ['SRY','IRF6', 'HAMP','GCH1','KCNJ11','PEX7'] # IRF6/HAMP/GCH1 X
-    mut_pos = [-75, -48, -25, -22, -54, -45]
-    mut_labels = ['-75G>A','-48A>U', '-25G>A','-22C>U','-54C>U','-45C>U']
+    gene = ['SRY','IRF6', 'HAMP','GCH1','KCNJ11','PEX7','PRKAR1A','SPINK1','HBB'] # IRF6/HAMP/GCH1 X
+    mut_pos = [-75, -48, -25, -22, -54, -45, -97, -53, -29]
+    mut_labels = ['-75G>A','-48A>U', '-25G>A','-22C>U','-54C>U','-45C>U','-97G>A','-53C>U','-29G>A']
 
     all_gene = meta[meta['geneName']==gene[i]]
-    
+    print(all_gene)
     if len(all_gene)>= 2:
-        all_gene = all_gene.iloc[1:2]
+        all_gene = all_gene.iloc[0:1]
     gene_utr5_seq = all_gene['utr5'].values[0]
     gene_cds_seq = all_gene['cds'].values[0]
     gene_utr3_seq = all_gene['utr3'].values[0]
@@ -244,7 +241,7 @@ def choose_gene(i):
 
 if __name__ == "__main__":
 
-    i=2
+    i=2 # SRY 가능, IRF6 가능(utr5_500까지 연장), HAMP 가능(utr5_100), GCH1 X, KCNJ11 X, PRKAR1A O, 
     gene_utr5_seq, gene_cds_seq, gene_utr3_seq, gene, mut_pos, mut_labels \
          = choose_gene(i)
     
@@ -261,7 +258,6 @@ if __name__ == "__main__":
     mutation_info[len(df_pivot.columns)+mut_pos] = 1
     new_row = pd.Series(mutation_info, index=df_pivot.columns, name="Mutation")
     df_pivot2 = pd.concat([df_pivot, new_row.to_frame().T], axis=0)
-
     df_pivot2.index = list(df_pivot.index) + ['Mutation']
     # print(df_pivot2)
     df_pivot2.to_csv(f'result_csv/Fig5D.{gene}_in_silico_mutagenesis.csv')
