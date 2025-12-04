@@ -152,6 +152,8 @@ def calculate_contribution(utr5_df, cds_df):
     global_cds = (cds_contribution / (utr5_contribution + cds_contribution)) * 100
     
     # Intensity of utr5 and cds
+    print(f'Region 별 contribution- utr5:{round(region_utr5,2)}, cds:{round(region_cds,2)}')
+    print(f'Global 별 contirbution- global utr5: {round(global_utr5,2)}, cds:{round(global_cds,2)}')
     return region_utr5, region_cds, global_utr5, global_cds
 
 
@@ -174,6 +176,9 @@ cds_nonpadding_df.columns = np.arange(
 )
 # Plotting
 barplot_utr5_cds(utr5_nonpadding_df, cds_nonpadding_df)
+
+# Calculation of contribution
+calculate_contribution(utr5_nonpadding_df, cds_nonpadding_df)
 # %%
 
 def count_number_nonzero_input(input_np: np.ndarray) -> np.ndarray:
