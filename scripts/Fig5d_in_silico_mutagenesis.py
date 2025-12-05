@@ -25,10 +25,10 @@ HAMP, SPY의 경우 UTR5 100nt으로 학습시킨 것이 결과가 잘나옴
 나머지는 UTR5 500nt으로 학습시킨 것이 더 잘나오는 경향이 있음
 """
 # load "All celltype" model ckp
-# ckp_file = pd.read_csv('duet_v2_checkpoints_500+1500.csv')
+ckp_file = pd.read_csv('duet_v2_checkpoints_500+1500.csv')
 
 # checkpont
-ckp_file = pd.read_csv('duet_v2_checkpoints.csv')
+# ckp_file = pd.read_csv('duet_v2_checkpoints.csv')
 all_celltype_ckp = ckp_file[ckp_file['cellType']=='All_celltypes']['checkpoint'].iloc[0]
 meta_path = '/fsx/s3/project/P240017_mRNA_UTR/data/Ribo-seq/mappings/GENCODE_v47/gencode.v47.map.all_tx.fullseq.total_var_metadata_v3.tsv'
 ############################################
@@ -241,7 +241,7 @@ def choose_gene(i):
 
 if __name__ == "__main__":
 
-    i=2 # SRY 가능, IRF6 가능(utr5_500까지 연장), HAMP 가능(utr5_100), GCH1 X, KCNJ11 X, PRKAR1A O, 
+    i=1 # SRY 가능, IRF6 가능(utr5_500까지 연장), HAMP 가능(utr5_100), GCH1 X, KCNJ11 X, PRKAR1A O, 
     gene_utr5_seq, gene_cds_seq, gene_utr3_seq, gene, mut_pos, mut_labels \
          = choose_gene(i)
     
