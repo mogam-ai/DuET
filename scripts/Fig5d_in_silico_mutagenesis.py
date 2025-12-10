@@ -165,7 +165,7 @@ def combined_plot(pivot_df, gene, mut_pos, mut_labels, figsize=(20, 6)):
     
     # Index T -> U로 변경
     pivot_df.index = pivot_df.index.str.replace('T', 'U')
-    pivot_df = pivot_df.iloc[:,-100:]
+    # pivot_df = pivot_df.iloc[:,-100:]
     # Heatmap 생성 (ax1)
     ax1 = fig.add_subplot(gs[1])  # 첫 번째 subplot
     
@@ -224,14 +224,19 @@ def choose_gene(i):
     유전자, 유전자 위치, 변이 정보"""
     
     meta = pd.read_csv(meta_path, sep='\t')
-    gene = ['SRY','IRF6', 'HAMP','GCH1','KCNJ11','PEX7','PRKAR1A','SPINK1','HBB'] # IRF6/HAMP/GCH1 X
-    mut_pos = [-75, -48, -25, -22, -54, -45, -97, -53, -29]
-    mut_labels = ['-75G>A','-48A>U', '-25G>A','-22C>U','-54C>U','-45C>U','-97G>A','-53C>U','-29G>A']
+    gene = ['SRY','IRF6', 'HAMP','GCH1','KCNJ11','PEX7','PRKAR1A','SPINK1','HBB','TWIST1','CFTR','HR','CDKN2A','ENG','GJB1','SHOX'] # IRF6/HAMP/GCH1 X
+    mut_pos = [-75, -48, -25, -22, -54, -45, -97, -53, -29, -18, -34, -321, -34, -127, -103, -19]
+            # SRY(0) IRF6(1) HAMP(2) GCH1(3) KCNJ11(4) PEX(5) PRKAR1A(6) SPINK1(7) HBB(8) TWIST1(9) CFTR(10) HR(11) CDKN2A(12)  ENG(13) GJB1(14) SHDX(16)
+    
+    enst_idx = [0,     0,       0,      2,        1,     1,      6,          0,      0,      0,      -1,      0,      0, 10, -1, -2]
+    print(f'개수: {len(gene), len(mut_pos), len(enst_idx)}')
+    mut_labels = ['-75G>A','-48A>U', '-25G>A','-22C>U','-54C>U','-45C>U','-97G>A','-53C>U','-29G>A','-18C>U','-34C>U','-321A>G','-34G>U','-127C>U','-103C>T','-19G>A']
 
     all_gene = meta[meta['geneName']==gene[i]]
     print(all_gene)
     if len(all_gene)>= 2:
-        all_gene = all_gene.iloc[0:1]
+        all_gene = all_gene.iloc[[enst_idx[i]]]
+        print(all_gene[['txID','geneName']])
     gene_utr5_seq = all_gene['utr5'].values[0]
     gene_cds_seq = all_gene['cds'].values[0]
     gene_utr3_seq = all_gene['utr3'].values[0]
@@ -241,7 +246,7 @@ def choose_gene(i):
 
 if __name__ == "__main__":
 
-    i=1 # SRY 가능, IRF6 가능(utr5_500까지 연장), HAMP 가능(utr5_100), GCH1 X, KCNJ11 X, PRKAR1A O, 
+    i = 7 # SRY 가능, IRF6 가능(utr5_500까지 연장), HAMP 가능(utr5_100), GCH1 X, KCNJ11 X, PRKAR1A O, 
     gene_utr5_seq, gene_cds_seq, gene_utr3_seq, gene, mut_pos, mut_labels \
          = choose_gene(i)
     
