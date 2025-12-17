@@ -1,3 +1,0 @@
-dataset:
-  train: datasets/65_celltypes_te/hesc_TE.tsv
-  test: datasets/65_celltypes_te/hesc_TE.tsv

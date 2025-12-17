@@ -1,0 +1,3 @@
+dataset:
+  train: datasets/64_celltypes_te/h9_TE.tsv
+  test: datasets/64_celltypes_te/h9_TE.tsv

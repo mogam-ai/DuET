@@ -1,3 +1,0 @@
-dataset:
-  train: datasets/65_celltypes_te/muscle-tissue_TE.tsv
-  test: datasets/65_celltypes_te/muscle-tissue_TE.tsv

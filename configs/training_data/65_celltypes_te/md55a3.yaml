@@ -1,3 +1,0 @@
-dataset:
-  train: datasets/65_celltypes_te/md55a3_TE.tsv
-  test: datasets/65_celltypes_te/md55a3_TE.tsv
