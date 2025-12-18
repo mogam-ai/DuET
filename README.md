@@ -28,7 +28,7 @@ Note: DuET utilizes CUDA-based GPUs for model training. The training process was
 ## Usage
 
 ### Data Preparation
-TE measurement for 65 human cell types and reference datasets used for the benchmark task are deposited at [This HuggingFace repository](https://huggingface.co/datasets/mogam-ai/DuET-dataset).
+TE measurement for 64 human cell types and reference datasets used for the benchmark task are deposited at [This HuggingFace repository](https://huggingface.co/datasets/mogam-ai/DuET-dataset).
 
 ### Model training
 **Training process**<br>
