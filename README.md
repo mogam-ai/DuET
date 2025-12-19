@@ -35,14 +35,14 @@ TE measurement for 64 human cell types and reference datasets used for the bench
 You can train DuET model instance using `scripts/train.py` as follows:
 ```bash
 $ CUDA_VISIBLE_DEVICES=0 python scripts/train.py \
-    --config configs/duet_base.yaml \
+    --config configs/duet_v2_base.yaml \
     --config configs/training_data/[cell type].yaml
 ```
 Multiple configs can be supplied, and the ones presented earlier will be overriden.<br>
 You can also specify `--override-configs` items in YAML syntax to override configurations at runtime.
 ```bash
 $ CUDA_VISIBLE_DEVICES=0 python scripts/train.py \
-    --config configs/duet_base.yaml \
+    --config configs/duet_v2_base.yaml \
     --config configs/training_data/all-celltype.yaml \
     --override-configs model.param.encoder='dual' optimizer.lr=1e-5 trainer.max_epochs=100
 ```
