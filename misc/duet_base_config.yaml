@@ -88,15 +88,15 @@ loss:
   ignore_test_name: true
 dataset:
   name: duet
-  train: /fsx/s3/project/P240017_mRNA_UTR/data/RPFdb/dataset_update/modified/TE_by_celltype/all-celltype_TE.tsv
-  test: /fsx/s3/project/P240017_mRNA_UTR/data/RPFdb/dataset_update/modified/TE_by_celltype/all-celltype_TE.tsv
+  train: ./datasets/64_celltypes_te/all-celltype_TE.tsv
+  test: ./datasets/64_celltypes_te/all-celltype_TE.tsv
   param:
     utr_seq_size: 100
     cds_seq_size: 1500
     utr_channel_size: 4
     cds_channel_size: 64
     use_sequence_feature: false
-    sequence_feature_path: /fsx/s3/project/P240017_mRNA_UTR/data/RPFdb/xrefs/gencode.v47.for_poc.metadata_v3.tsv
+    sequence_feature_path: ./datasets/64_celltypes_te/64_celltypes_sequence_features.tsv
     utr_col: utr5
     cds_col: cds
     label_col: te
