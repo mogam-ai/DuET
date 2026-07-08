@@ -1,0 +1,36 @@
+name: duet-preprocessing
+# Preprocessing env, kept separate from the main `duet` env: it pulls a
+# bioconda/Bioconductor tree (sequencing tools + R) that should not be mixed
+# with the pytorch-cuda stack in environment.yml.
+#
+# riboWaltz is NOT on bioconda; install it into this env from R after creation:
+#   conda activate duet-preprocessing
+#   R -e 'devtools::install_github("LabTranslationalArchitectomics/riboWaltz", dependencies = TRUE)'
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  # Python (calculate_te.py, build_gene_metadata.py, summarize_*.py)
+  - python=3.10
+  - numpy=1.26.3
+  - pandas=2.1.4
+  - scipy=1.10.1
+  - pyarrow
+  - tqdm
+  # sequencing tools (pipeline.sh steps 1-5)
+  - sra-tools=3.1.1        # prefetch, fasterq-dump
+  - bowtie2=2.5.4
+  - cutadapt=5.2
+  - fastp=1.3.1
+  - samtools=1.21
+  - bbmap=39.19            # rename.sh
+  # build toolchain for quantify.cpp / fastq_stats.c
+  - cxx-compiler
+  - c-compiler
+  - htslib                 # quantify.cpp links against -lhts
+  # R + ribo-seq QC (riboseq_qc_2.R; riboWaltz installed separately, see above)
+  - r-base=4.5.2
+  - r-data.table=1.18.2.1
+  - r-devtools             # for install_github("...riboWaltz")
+  - bioconductor-rsamtools=2.26.0
+  - bioconductor-genomicalignments=1.46.0

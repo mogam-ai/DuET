@@ -1,0 +1,43 @@
+# Data configs
+tx_info_path: 'data/cleaned_all-celltype_TE_log1p.tsv'
+num_workers: 16
+remove_extreme_txs: False
+train_batch_size: 64
+val_batch_size: 128
+test_batch_size: 128
+max_seq_len: 12_288
+num_targets: 1
+# The pattern used to pick the target column(s):
+target_column_pattern: '^TE_'
+pad_5_prime: False
+split_utr5_cds_utr3_channels: False
+label_codons: True
+label_3rd_nt_of_codons: False
+label_utr5: False
+label_utr3: False
+label_splice_sites: False
+label_up_probs: False
+with_NAs: False
+
+# Configs for RiboNN or Saluki
+max_shift: 0
+symmetric_shift: True
+augmentation_shifts: [-3, -2, -1, 0, 1, 2, 3]
+residual: False
+go_backwards: True
+rnn_type: "gru"
+filters: 64
+kernel_size: 5
+conv_stride: 1
+conv_dilation: 1
+conv_padding: 0
+num_conv_layers: 10 
+dropout: 0.3
+ln_epsilon: 0.007
+bn_momentum: 0.9
+optimizer: AdamW
+lr: 0.005  # AdamW
+l2_scale: 0.001 # AdamW
+min_lr: 0.0000001
+adam_beta1: 0.90
+adam_beta2: 0.998

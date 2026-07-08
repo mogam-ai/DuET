@@ -1,0 +1,34 @@
+# DuET benchmark model config.
+model_class: duet
+precision: 16-mixed
+output_names:
+  multi:    DuET_multi
+  multi_cv: DuET_multi_cv
+  finetune: DuET_ft
+  single:   DuET
+
+model_params:
+  cnn_filters: 64
+  gru_hidden_dim: 96
+
+train:
+  utr_seq_size: 500
+  cds_seq_size: 3000
+  use_codon_encoding: true
+  lr: 1.0e-3
+  weight_decay: 0.02
+  batch_size: 64
+  max_epochs: 70
+  patience: 10
+  lr_patience: 5
+  lr_factor: 0.5
+  dropout: 0.4
+
+finetune:
+  p1_epochs: 10
+  p2_epochs: 60
+  patience: 10
+  lr_p1: 1.0e-3
+  lr_p2: 1.0e-4
+  inner_folds: 9
+  top_k: 5

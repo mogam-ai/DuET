@@ -1,0 +1,11 @@
+dataset:
+  train: datasets/te_benchmark/HEK293T_sequence.tsv
+  test: datasets/te_benchmark/HEK293T_sequence.tsv
+  param:
+    sequence_feature_path: datasets/te_benchmark/te_benchmark_data_sequence_features.tsv
+
+datamodule:
+  batch_size: 16
+
+trainer:
+  early_stopping: 12

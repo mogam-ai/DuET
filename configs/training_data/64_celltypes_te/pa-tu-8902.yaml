@@ -1,0 +1,3 @@
+dataset:
+  train: datasets/64_celltypes_te/pa-tu-8902_TE.tsv
+  test: datasets/64_celltypes_te/pa-tu-8902_TE.tsv

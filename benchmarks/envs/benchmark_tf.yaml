@@ -1,0 +1,22 @@
+name: benchmark_tf
+# TensorFlow benchmark environment: Optimus 5-prime, FramePool.
+# Slimmed to direct dependencies with pinned core frameworks; conda resolves the rest.
+# Full pinned snapshot (exact reproduction) is in benchmark_tf_full.yaml.
+channels:
+  - conda-forge
+  - nvidia
+  - defaults
+dependencies:
+  - python=3.10.18
+  - tensorflow=2.16.1
+  - keras=3.10.0
+  - cudnn=8.9.7.29
+  - numpy=1.26.4
+  - pip
+  - pip:
+    - pandas==1.5.3
+    - scipy==1.15.3
+    - scikit-learn==1.7.0
+    - matplotlib==3.10.3
+    - seaborn==0.13.2
+    - pyahocorasick==2.2.0    # framepool motif scan

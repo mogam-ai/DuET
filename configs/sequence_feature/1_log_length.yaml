@@ -1,0 +1,4 @@
+dataset:
+  param:
+    use_sequence_feature: True
+    sequence_feature_cols: [ "utr5_logLength", "cds_logLength" ]

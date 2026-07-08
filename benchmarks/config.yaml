@@ -1,0 +1,85 @@
+output_dir: benchmark_out
+
+# Environment
+# Path to your conda profile script, e.g. ~/miniconda3/etc/profile.d/conda.sh
+conda_sh: ${CONDA_SH}
+
+# GPU parallelism
+gpus: [0, 1]
+jobs_per_gpu: 3
+
+# Dataset definitions
+datasets:
+  # MRL rank split: train_{name}.tsv / {name}.tsv (test)
+  mrl_rank:
+    base_path: datasets/mrl_benchmark
+    names: [U_1, U_2, m1pU_1, m1pU_2, mC-U_1, mC-U_2, pU_1, pU_2]
+    train_pattern: "train_{name}.tsv"
+    test_pattern: "{name}.tsv"
+    split: rank  # pre-split train/test
+    scaling: standard
+    label_col: te
+    utr_col: utr5
+    inp_len: 50
+    models: [optimus5p, framepool, UTR-LM, translatelstm, GEMORNA]  # RiboNN excluded
+
+  # TE benchmark: representative 8 cell types → 10-fold
+  celltype_te:
+    base_path: datasets/celltype_te
+    names:
+      - gm12878_TE
+      - gm12892_TE
+      - hek293t_TE
+      - hela_TE
+      - imr-90_TE
+      - muscle-tissue_TE
+      - pc3_TE
+      - u-2-os_TE
+    data_pattern: "{name}.tsv"
+    split: kfold
+    k: 10
+    seed: 42
+    scaling: standard
+    label_col: logratio_te
+    utr_col: utr5
+    inp_len: 100
+
+  # Celltype TE multi-target: all celltypes merged → 10-fold (multi-target models only)
+  celltype_te_multi:
+    base_path: datasets
+    names:
+      - multitask
+    data_pattern: "{name}_TE.tsv"
+    split: kfold
+    k: 10
+    seed: 42
+    scaling: none
+    label_col: "^TE_"
+    utr_col: utr5
+    inp_len: 100
+    models: [RiboNN, DuET_multi]  # multi-target models only
+
+# Model definitions
+models:
+  DuET:
+    env: benchmark_torch
+    config:
+      - configs/duet.yaml
+  RiboNN:
+    env: benchmark_torch
+    inner_fold: 5
+  UTR-LM:
+    env: benchmark_torch
+  optimus5p:
+    env: benchmark_tf
+  framepool:
+    env: benchmark_tf
+  translatelstm:
+    env: benchmark_torch
+    # dual encoder for celltype_te
+    cds_col: cds
+    cds_inp_len: 100
+    join_col: txID
+    log_label: False
+    sequence_feature_path: datasets/sequence_features.tsv
+    sequence_feature_cols: ['utr5_logLength', 'utr5_normMFE', 'utr5_gcRatio', 'utr5_numOutFrameAUG', 'utr5_numInFrameAUG']

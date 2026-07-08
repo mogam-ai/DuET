@@ -1,0 +1,4 @@
+dataset:
+  param:
+    use_codon_encoding: False
+    cds_channel_size: 4

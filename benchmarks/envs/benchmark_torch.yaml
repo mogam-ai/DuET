@@ -1,0 +1,30 @@
+name: benchmark_torch
+# PyTorch benchmark environment: DuET runners + RiboNN, UTR-LM, TranslateLSTM, GEMORNA.
+# Slimmed to direct dependencies with pinned core frameworks; conda resolves the rest.
+# Full pinned snapshot (exact reproduction) is in benchmark_torch_full.yaml.
+channels:
+  - conda-forge
+  - nvidia
+  - pytorch
+  - defaults
+dependencies:
+  - python=3.10.13
+  - pytorch-cuda=12.1
+  - numpy=1.26.3
+  - matplotlib
+  - pip
+  - pip:
+    # CUDA 12.1 wheels
+    - torch==2.5.1+cu121
+    - torchvision==0.20.1+cu121
+    - torchaudio==2.5.1+cu121
+    - pytorch-lightning==2.4.0
+    - torchmetrics==1.6.0
+    - pandas==2.2.3
+    - scipy==1.15.3
+    - scikit-learn==1.7.2
+    - joblib
+    - tqdm
+    - pyyaml
+    - mlflow==2.18.0        # RiboNN training/transfer_learning
+    # UTR-LM's ESM code is vendored under baselines/UTR-LM/esm (no PyPI esm needed)

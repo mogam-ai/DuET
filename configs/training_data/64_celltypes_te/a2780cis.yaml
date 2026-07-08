@@ -1,0 +1,3 @@
+dataset:
+  train: datasets/64_celltypes_te/a2780cis_TE.tsv
+  test: datasets/64_celltypes_te/a2780cis_TE.tsv

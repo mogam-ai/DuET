@@ -1,0 +1,5 @@
+dataset:
+  train: datasets/celltypes_te_v2/hek293t_TE.tsv
+  test: datasets/celltypes_te_v2/hek293t_TE.tsv
+  param:
+    label_col: logratio_te
