@@ -190,7 +190,5 @@ and `environment_motif.yml`.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-MIT (see `LICENSE`).
-
 ## Citation
 To be announced.
