@@ -1,4 +1,5 @@
 # DuET: A Unified Deep Learning Framework for Predicting mRNA Translation Efficiency Across Human Cell Types
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21270977.svg)](https://doi.org/10.5281/zenodo.21270977)
 
 ![DuET Model Scheme](duet_scheme.png)
 
@@ -30,7 +31,6 @@ $ pip install -e ".[dev]"
 ```
 
 ### Datasets
-
 The `datasets/` directory is not included in this repository. Download the
 dataset archive from Zenodo, extract it, and place the resulting `datasets/`
 directory at the repository root (this is where the training/benchmark configs
