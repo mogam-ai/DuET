@@ -37,7 +37,7 @@ directory at the repository root (this is where the training/benchmark configs
 expect it):
 
 ```bash
-# Download datasets.tar.gz from Zenodo: [ZENODO_LINK_PLACEHOLDER]
+# Download datasets.tar.gz from Zenodo DOI: 10.5281/zenodo.21253734
 $ tar -xzf datasets.tar.gz    # extracts a datasets/ directory
 $ mv datasets/ /path/to/DuET/ # place it at the repository root
 ```
