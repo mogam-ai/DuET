@@ -1,0 +1,5 @@
+loss:
+  name: huber_corr
+  param:
+    delta: 1.0
+    corr_weight: 0.5

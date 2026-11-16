@@ -1,0 +1,18 @@
+exp_name: duet_triple
+notes: "Three-region model: 5' UTR + CDS + 3' UTR."
+
+model:
+  name: duet_triple
+  param:
+    utr3_kernel_taper: [7, 5, 5, 3]
+    utr3_cnn_filters: 48
+    utr3_gru_hidden_dim: 64
+
+dataset:
+  name: duet_triple
+  train: datasets/multitask_utr3_TE.tsv
+  test: datasets/multitask_utr3_TE.tsv
+  param:
+    utr3_seq_size: 1000
+    utr3_channel_size: 4
+    utr3_col: utr3

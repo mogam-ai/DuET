@@ -1,0 +1,8 @@
+exp_name: duet_cdsonly
+notes: "Region ablation: CDS only."
+
+model:
+  name: duet_cdsonly
+
+dataset:
+  name: duet_cdsonly

@@ -1,0 +1,77 @@
+exp_name: duet
+notes: "DuET main model: multi-cell-type TE prediction (masked Huber)."
+use_wandb: True
+project_name: duet
+debug: False
+log_dir: _logs
+seed: 42
+
+model:
+  name: duet
+  param:
+    utr_vocab_size: 5
+    utr_embed_dim: 96
+    utr_padding_idx: 4
+    codon_vocab_size: 65
+    cds_embed_dim: 128
+    cds_padding_idx: 64
+    cnn_filters: 64
+    cnn_layers: 4
+    gru_hidden_dim: 96
+    fusion_hidden: 256
+    dropout: 0.4
+    utr_kernel_taper: [7, 5, 5, 3]
+    cds_kernel_taper: [5, 3, 3, 3]
+    n_targets: 76
+
+loss:
+  name: huber
+  ignore_test_name: True
+
+dataset:
+  name: duet
+  train: datasets/multitask_TE.tsv
+  test: datasets/multitask_TE.tsv
+  param:
+    utr_seq_size: 500
+    cds_seq_size: 3000
+    utr_channel_size: 4
+    cds_channel_size: 64
+    use_sequence_feature: False
+    sequence_feature_path: datasets/sequence_features.tsv
+    utr_col: utr5
+    cds_col: cds
+    label_col: logratio_te
+    join_col: txID
+    use_codon_encoding: True
+    te_column_prefix: "TE_"
+
+datamodule:
+  batch_size: 64
+  num_workers: 1
+  train_size: 0.95
+  do_kfold_test: True
+  kfold_test_k: 10
+  kfold_test_fold: 0
+
+optimizer:
+  name: adamw
+  lr: 1e-3
+  param:
+    weight_decay: 0.02
+
+scheduler:
+  name: ReduceLROnPlateau
+  param:
+    factor: 0.5
+    patience: 5
+    min_lr: 1e-7
+
+trainer:
+  max_epochs: 70
+  save_epochs: 1
+  early_stopping: 10
+  min_delta: 0.001
+  run_fit: True
+  run_test: True
+  precision: 16-mixed

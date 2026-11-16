@@ -1,0 +1,3 @@
+dataset:
+  train: datasets/64_celltypes_te/plc-prf-5-cancer-stem-cell_TE.tsv
+  test: datasets/64_celltypes_te/plc-prf-5-cancer-stem-cell_TE.tsv

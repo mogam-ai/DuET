@@ -1,0 +1,13 @@
+name: motif
+# Motif-search tools env, kept separate from the main `duet` env: MEME Suite is a
+# Perl/C CLI toolkit (not a Python package) and pulls a bioconda system-dependency
+# tree that should not be mixed with the pytorch-cuda stack in environment.yml.
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - python=3.10
+  - meme=5.5.9          # streme / xstreme / tomtom / sea
+  - pip
+  - pip:
+    - modisco-lite==2.4.0   # TF-MoDISco (report step calls MEME tomtom)

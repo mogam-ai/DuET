@@ -1,0 +1,8 @@
+exp_name: duet_utr5only
+notes: "Region ablation: 5' UTR only."
+
+model:
+  name: duet_utr5only
+
+dataset:
+  name: duet_utr5only

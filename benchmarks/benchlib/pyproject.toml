@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "benchlib"
+version = "0.1.0"
+description = "Shared utilities for DuET benchmark suite"
+requires-python = ">=3.10"
+dependencies = [
+    "numpy",
+    "pandas",
+    "scikit-learn",
+    "scipy",
+    "pyyaml",
+]
